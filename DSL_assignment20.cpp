@@ -52,6 +52,37 @@ bool book_seat(int row_number, int seat_number, string booking_name){
     cout << "Seat not found." << endl;
     return false;
 }
+
+bool cancel_seat(int seat_row, int seat_number, string name){
+    struct Seat *traverser;
+    traverser = head_seats[seat_row];
+    while (traverser->seat_row==seat_row){
+        if(seat_number == traverser->seat_number) {
+            if(!traverser->is_booked){
+                cout << "Requested Seat isn't booked.\nPlease Re-Check your credentials." << endl;
+                return false;
+            }
+            else if(traverser->is_booked){
+                if(traverser->booked_to==name){
+                    traverser->booked_to="";
+                    traverser->is_booked= false;
+                    cout << "Successfully cancelled booking for requested seat."<<endl;
+                    return true;
+                }
+                else{
+                    cout << "Requested Seat doesn't belong to you.\nPlease recheck your username."<<endl;
+                    return false;
+                }
+            }
+        }
+        else{
+            traverser = traverser->next;
+        }
+    }
+    cout << "Requested Seat wasn't found." << endl;
+    return false;
+}
+
 int main(){
     struct Seat *Head;
     Head=NULL;
@@ -109,6 +140,22 @@ int main(){
             }
             else{
                 book_seat(row_number, seat_number, booked_to);
+            }
+        }
+        else if(choice==3){
+            int seat_row, seat_number;
+            string booked_to;
+            cout << "Please Enter Row of Seat you want to cancel > " << endl;
+            cin >> seat_row;
+            cout << "Please Enter Number of Seat you want to cancel > " << endl ;
+            cin >> seat_number;
+            cout << "Please Enter Your Name > " << endl;
+            cin >> booked_to;
+            if(seat_number > number_of_seats || seat_row > number_of_rows){
+                cout << "Error - Seat doesn't exists" << endl << "Re-Check your seat credentials.";
+            }
+            else{
+            cancel_seat(seat_row, seat_number, booked_to);
             }
         }
 
