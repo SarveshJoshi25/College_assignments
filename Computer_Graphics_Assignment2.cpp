@@ -7,9 +7,6 @@ double X1, X2, Y1, Y2;
 int choice;
 using namespace std;
 
-bool dda_line_drawing(double X1, double Y1, double X2, double Y2);
-bool dda_line_drawing_dotted(double X1, double Y1, double X2, double Y2);
-bool dda_line_drawing_dashed(double X1, double Y1, double X2, double Y2);
 
 void myInit(){
 	glClearColor(1.0,1.0,1.0,0);
