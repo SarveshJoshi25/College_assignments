@@ -11,3 +11,5 @@ create table section(section_id varchar(255), semester varchar(255), year varcha
 create table teaches(instructor_id int(11), section_id varchar(255), semester varchar(255), year varchar(255), course_id varchar(255), foreign key(instructor_id) references instructor(instructor_id), foreign key(course_id, section_id, semester, year) references section(course_id, section_id, semester, year));
 alter table teaches add primary key(instructor_id, course_id, section_id, semester, year);
 
+ create table takes(student_id varchar(255), section_id varchar(255), semester varchar(255), year varchar(255), course_id varchar(255), grade varchar(255), foreign key(student_id) references student(student_id), foreign key(course_id, section_id, semester, year) references section(course_id, section_id, semester, year), primary key(course_id, section_id, semester, year, student_id));
+
