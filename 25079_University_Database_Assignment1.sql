@@ -8,4 +8,6 @@ create table classroom (building int, room_number varchar(255), capacity int def
 create table time_slot(time_slot_id varchar(255) primary key, day varchar(255) not null, start_time time not null, end_time time not null);
 
 create table section(section_id varchar(255), semester varchar(255), year varchar(255), course_id varchar(255), foreign key(course_id) references course(course_id), building int, room_number varchar(255), foreign key(building, room_number) references classroom(building,room_number), time_slot_id varchar(255), foreign key(time_slot_id) references time_slot(time_slot_id), primary key(course_id, section_id, semester, year));
+create table teaches(instructor_id int(11), section_id varchar(255), semester varchar(255), year varchar(255), course_id varchar(255), foreign key(instructor_id) references instructor(instructor_id), foreign key(course_id, section_id, semester, year) references section(course_id, section_id, semester, year));
+alter table teaches add primary key(instructor_id, course_id, section_id, semester, year);
 
